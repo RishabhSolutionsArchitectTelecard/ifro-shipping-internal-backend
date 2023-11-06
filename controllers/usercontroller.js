@@ -4,7 +4,14 @@ const UserController = {
   // @desc create user
   // @route POST /user
   // @access Private
-  createUser: async (req, res) => {},
+  createUser: async (req, res) => {
+    try {
+      const newUser = await UserService.createUser(req.body); // Assuming user data is sent in the request body
+      res.status(201).json(newUser);
+    } catch (err) {
+      res.status(500).json({ message: err.message });
+    }
+  },
 
   updateUser: async (req, res) => {
     const userId = req.params.id; // Assuming user ID is in the request params
