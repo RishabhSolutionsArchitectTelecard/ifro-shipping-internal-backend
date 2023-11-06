@@ -1,5 +1,5 @@
 const UserService = require("../services/userservice");
-const asyncHandler = req("express-async-handler");
+// const asyncHandler = require("express-async-handler");
 const UserController = {
   // @desc create user
   // @route POST /user

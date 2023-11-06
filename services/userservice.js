@@ -18,14 +18,14 @@ const UserSerivice = {
       res.status(400).json({ message: "All fields are required" });
     }
     // Check if the user already exists
-    const existingUser = await User.findOne({ email });
+    const existingUser = await user.findOne({ email });
     if (existingUser.length > 0) {
       return res.status(400).json({ message: "User email already exists" });
     }
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
     // Create a new user and save it to database
-    const newUser = new User({
+    const newUser = new user({
       email,
       password: hashedPassword,
       firstname,
@@ -43,7 +43,7 @@ const UserSerivice = {
   // @access private
   getUser: asyncHandler(async (req, res) => {
     // Get all users from MongoDB
-    const users = await User.find().select("-password").lean();
+    const users = await user.find().select("-password").lean();
 
     // If no users
     if (!users?.length) {
